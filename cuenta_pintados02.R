@@ -95,15 +95,14 @@ tab_porcentajes <- function(hojas, lista){
 # This process is carry out for each section. Thus, I think that is a good idea
 # to have only one list with all the paths in order to get a shorter routine
 
-con_cvs <- which(stringr::str_detect(list.files("D:/ENVE/ENVE 2024/Codigos_2022/cuenta_pintados/"), "cv"))
-files_de_cvs <- list.files("D:/ENVE/ENVE 2024/Codigos_2022/cuenta_pintados/")[con_cvs]
-ruta_cv <- paste0("D:/ENVE/ENVE 2024/Codigos_2022/cuenta_pintados/", files_de_cvs)
+con_cvs <- which(stringr::str_detect(list.files("path"), "cv"))
+files_de_cvs <- list.files("path")[con_cvs]
+ruta_cv <- paste0("path", files_de_cvs)
 
 # Path of the excel macros.
-source("D:/ENVE/ENVE 2024/Codigos_2022/cuenta_pintados/macro_tanos.R")
-ruta_m <- "D:/Varios/correr_macro_R/correr_macro_R/macros_R/tanos.xlsm"
+source("~/macro_tanos.R")
+ruta_m <- "~/tanos.xlsm"
 
-#ruta_cv <- "D:/ENVE/ENVE 2024/Codigos_2022/cuenta_pintados/enve2022_cv_I_nivel_victimizacion_delincuencia.xlsx"
 for (i in 1:length(ruta_cv)) {
 macro_tanos(ruta_m = ruta_m, lib_cv = ruta_cv[i] )
 }
@@ -111,7 +110,7 @@ macro_tanos(ruta_m = ruta_m, lib_cv = ruta_cv[i] )
 #---- Making the count ---------------------------------------------------------
 # First I load the output workbook
 
-calidad <- openxlsx::loadWorkbook("D:/ENVE/ENVE 2024/Codigos_2022/cuenta_pintados/tab_cuenta_pintados.xlsx")
+calidad <- openxlsx::loadWorkbook("~/tab_cuenta_pintados.xlsx")
 
 # Now I load the workbook with the new mark and run the previous functions. 
 # I already have the corresponding paths of the files
@@ -136,4 +135,4 @@ openxlsx::writeData(calidad, x=tab_porcentajes(hojas=hojas, lista = resumen), sh
 
 
 # Finally I save the workbook with the new tables.
-openxlsx::saveWorkbook(calidad, "D:/ENVE/ENVE 2024/Codigos_2022/cuenta_pintados/tab_cuenta_pintados.xlsx", overwrite = T)
+openxlsx::saveWorkbook(calidad, "~/tab_cuenta_pintados.xlsx", overwrite = T)
